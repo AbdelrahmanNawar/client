@@ -1,0 +1,41 @@
+<label class="push-right">Order: {{ID}}</label>
+<div></div>
+<label class="push-right">Status: {{Pending}}</label>
+<div></div>
+
+<mat-grid-list cols="4" rowHeight="5:1">
+
+    <mat-grid-title>
+        <mat-grid-tile>
+            Name
+        </mat-grid-tile>
+        <mat-grid-tile>
+            Price per each
+        </mat-grid-tile>
+        <mat-grid-tile>
+            Quantity
+        </mat-grid-tile>
+        <mat-grid-tile>
+            Total price
+        </mat-grid-tile>
+    </mat-grid-title>
+
+    <ng-container *ngFor="let item of myList">
+        <mat-grid-tile>
+            <a href="">{{item.name}}</a>
+        </mat-grid-tile>
+        
+        <mat-grid-tile>
+            <p>{{item.phone}}</p>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+            <p>{{item.quantity}}</p>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+            <p>{{item.last}}</p>
+        </mat-grid-tile>
+    </ng-container>
+
+</mat-grid-list>

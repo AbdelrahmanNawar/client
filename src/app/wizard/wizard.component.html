@@ -1,0 +1,42 @@
+<div fxLayout style="height: 70%;" >
+    <mat-horizontal-stepper>
+
+        <mat-step 
+            [stepControl]="firstFormGroup"
+            label="choose Your Products">
+
+        <app-step1-products>
+            
+        </app-step1-products>
+
+        </mat-step>
+        
+        <mat-step 
+            [stepControl]="secondFormGroup"
+            label="choose Your shipment Details">
+        
+            <app-step2-shipment>
+            </app-step2-shipment>
+
+        </mat-step>
+        
+        <mat-step 
+            [stepControl]="thirdFormGroup"
+            label="choose Your Payment Method">
+        
+            <app-step3-payment>
+            </app-step3-payment>
+            
+        </mat-step>
+        
+        <mat-step 
+            [stepControl]="fourthFormGroup"
+            label="Display">
+        
+            <app-step4-finalize>
+            </app-step4-finalize>
+            
+        </mat-step>
+
+    </mat-horizontal-stepper>
+</div>
