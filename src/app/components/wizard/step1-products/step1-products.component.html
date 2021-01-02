@@ -1,1 +1,55 @@
-<h1>HI</h1>
+<label class="adjust-space">Choose your items</label>
+<label>Choose the quantity</label>
+<br>
+<mat-form-field appearance="fill">
+    <mat-label>select item</mat-label>
+    <mat-select [formControl]  = "productControl" required>
+        <mat-option>None</mat-option>
+        <mat-option *ngFor="let item of productsList" [value] = "item">
+            {{item.name}}
+        </mat-option>
+    </mat-select>
+    <mat-error *ngIf="productControl.hasError('required')">Please add items</mat-error>
+</mat-form-field>
+ <input class="adjust-input" type="number" min="0" required [(ngModel)]="quantity">
+
+ <input type="submit" class="push-right" value="Add" (click)="addItem()">
+<br>
+ <span *ngIf="quantity==0" class="danger">Please choose quantity</span>
+ 
+<mat-grid-list class="grid-full" cols="4" rowHeight="3:1">
+
+    <mat-grid-title>
+        <mat-grid-tile>
+            Name
+        </mat-grid-tile>
+        <mat-grid-tile>
+            Price per each
+        </mat-grid-tile>
+        <mat-grid-tile>
+            Quantity
+        </mat-grid-tile>
+        <mat-grid-tile>
+            Total price
+        </mat-grid-tile>
+    </mat-grid-title>
+
+    <ng-container *ngFor="let item of myList">
+        <mat-grid-tile>
+            <a href="">{{item.name}}</a>
+        </mat-grid-tile>
+        
+        <mat-grid-tile>
+            <p>{{item.price}}</p>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+            <p>{{item.quantity}}</p>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+            <p>{{item.price * item.quantity}}</p>
+        </mat-grid-tile>
+    </ng-container>
+
+</mat-grid-list>

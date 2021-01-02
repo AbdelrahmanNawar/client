@@ -18,6 +18,8 @@ import { Step4FinalizeComponent } from './components/wizard/step4-finalize/step4
 import { WizardComponent } from './components/wizard/wizard.component';
 import { DisplayOrdersComponent } from './components/display-orders/display-orders.component';
 import { UserOrderComponent } from './components/user-order/user-order.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -42,8 +44,12 @@ import { UserOrderComponent } from './components/user-order/user-order.component
     ReactiveFormsModule,
     MatIconModule,
     MatStepperModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
-  providers: [],
+  providers: [
+    MatDatepickerModule,  
+  ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

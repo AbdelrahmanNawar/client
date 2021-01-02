@@ -1,5 +1,7 @@
+import { dumper3 } from './../../../models/dumper3';
 import { Component, OnInit } from '@angular/core';
-import { dumper } from 'src/app/models/dumper';
+import { FormControl, Validators } from '@angular/forms';
+import { dumper4 } from 'src/app/models/dumper4';
 
 @Component({
   selector: 'app-step1-products',
@@ -8,31 +10,33 @@ import { dumper } from 'src/app/models/dumper';
 })
 export class Step1ProductsComponent implements OnInit {
 
-  myList: Array<dumper> = [{
-    name : "abdou",
-    phone : 112,
-    quantity : 170,
-    last : "no"
-  },
-  {
-    name : "boda",
-    phone : 1112,
-    quantity : 7110,
-    last : "no"
-  },
-  {
-    name : "obad",
-    phone : 1211,
-    quantity : 711110,
-    last : "yes"
-  }];
+  productControl = new FormControl('', Validators.required);
+  productsList: dumper3[] = [
+    {name: 'AKM', price: 150},
+    {name: 'P90', price: 225},
+    {name: 'AWM', price: 510},
+    {name: 'Pistol', price: 90},
+  ];
 
-  Pending:string = "Pending";
-  ID: number = 855431846;
-
+  quantity: number = 0;
+  myList: Array<dumper4> = [];
+  
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  addItem(): void{
+    if(this.quantity !==0 && this.productControl.value){
+      this.myList.push({
+        name: this.productControl.value?.name,
+        price: this.productControl.value?.price,
+        quantity: this.quantity
+      });
+    } else {
+      console.log("fe moshkel");
+      console.log("productControl", this.productControl);
+      console.log("quantity", this.quantity);  
+    }
+  }
 }

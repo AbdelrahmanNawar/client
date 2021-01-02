@@ -1,1 +1,19 @@
-<p>step3-payment works!</p>
+<label>Ender your Card Number:</label>
+<br>
+<div>
+    <input class="adjust-card-input" type="text" maxlength="14" minlength="14" [(ngModel)]="cardNumber">
+    <br>
+    <span class="danger" *ngIf="!isCardNumValid">please enter a valid card number</span>
+</div>
+<div class="separate"></div>
+<label>Exp date </label>
+<label>Month</label>
+<label>Year</label>
+<div>
+    <input class="adjust-date1-input" type="number" maxlength="2" minlength="2" [(ngModel)]="month">
+    <input class="adjust-date2-input" type="number" maxlength="4" minlength="4" [(ngModel)]="year">
+    <br>
+    <span class="danger" *ngIf="!isExpDateValid">please enter a valid exp date</span>
+</div>
+<div class="separate"></div>
+<input class="push-right" type="submit" value="verify" (click)="verify()">
