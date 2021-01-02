@@ -1,12 +1,13 @@
-import { dumper } from './../../models/dumper';
 import { Component, OnInit } from '@angular/core';
+import { dumper } from 'src/app/models/dumper';
 
 @Component({
-  selector: 'app-step1-products',
-  templateUrl: './step1-products.component.html',
-  styleUrls: ['./step1-products.component.css']
+  selector: 'app-user-order',
+  templateUrl: './user-order.component.html',
+  styleUrls: ['./user-order.component.css']
 })
-export class Step1ProductsComponent implements OnInit {
+export class UserOrderComponent implements OnInit {
+
 
   myList: Array<dumper> = [{
     name : "abdou",
@@ -29,7 +30,7 @@ export class Step1ProductsComponent implements OnInit {
 
   Pending:string = "Pending";
   ID: number = 855431846;
-
+  
   constructor() { }
 
   ngOnInit(): void {
