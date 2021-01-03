@@ -1,5 +1,6 @@
+import { dumper5 } from './../../../models/dumper5';
 import { dumper3 } from './../../../models/dumper3';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { dumper4 } from 'src/app/models/dumper4';
 
@@ -9,7 +10,17 @@ import { dumper4 } from 'src/app/models/dumper4';
   styleUrls: ['./step1-products.component.css']
 })
 export class Step1ProductsComponent implements OnInit {
-
+  
+  @Output() newItemEvent = new EventEmitter<dumper4>();
+  @Input() order: dumper5 = {
+    CardNumber: "",
+    expDate: new Date(2020,2),
+    expectedDate: new Date(2020,2),
+    productList: [],
+    shipmentMethod: "",
+    totalCost: 0
+  };
+  
   productControl = new FormControl('', Validators.required);
   productsList: dumper3[] = [
     {name: 'AKM', price: 150},
@@ -19,7 +30,6 @@ export class Step1ProductsComponent implements OnInit {
   ];
 
   quantity: number = 0;
-  myList: Array<dumper4> = [];
   
   constructor() { }
 
@@ -28,11 +38,11 @@ export class Step1ProductsComponent implements OnInit {
 
   addItem(): void{
     if(this.quantity !==0 && this.productControl.value){
-      this.myList.push({
+      this.newItemEvent.emit({
         name: this.productControl.value?.name,
         price: this.productControl.value?.price,
         quantity: this.quantity
-      });
+      })
     } else {
       console.log("fe moshkel");
       console.log("productControl", this.productControl);

@@ -5,7 +5,9 @@
             [stepControl]="firstFormGroup"
             label="choose Your Products">
 
-        <app-step1-products>
+        <app-step1-products 
+        [order]= "order" 
+        (newItemEvent)="addItems($event)">
             
         </app-step1-products>
 
@@ -15,7 +17,8 @@
             [stepControl]="secondFormGroup"
             label="choose Your shipment Details">
         
-            <app-step2-shipment>
+            <app-step2-shipment [order]= "order" 
+            (addShipmentEvent)="addShipment($event)">
             </app-step2-shipment>
 
         </mat-step>
@@ -24,7 +27,8 @@
             [stepControl]="thirdFormGroup"
             label="choose Your Payment Method">
         
-            <app-step3-payment>
+            <app-step3-payment [order]= "order" 
+            (addPaymentEvent)="addPayment($event)">
             </app-step3-payment>
             
         </mat-step>
@@ -33,10 +37,12 @@
             [stepControl]="fourthFormGroup"
             label="Display">
         
-            <app-step4-finalize>
+            <app-step4-finalize [order]= "order">
             </app-step4-finalize>
             
         </mat-step>
 
     </mat-horizontal-stepper>
+
 </div>
+

@@ -1,0 +1,18 @@
+.adjust-spacing{
+    margin-bottom: 20px;
+}
+
+.adjust-card-date{
+    margin-right: 120px;
+    float: right;
+}
+
+.adjust-shipping-date{
+    margin-right: 51px;
+    float: right;
+}
+
+.adjust-submit-button{
+    margin-right: 100px;
+    float: right;
+}

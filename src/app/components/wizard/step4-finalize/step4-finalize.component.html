@@ -1,1 +1,47 @@
-<p>step4-finalize works!</p>
+<span>Card Number: {{order.CardNumber}}</span>
+<span class="adjust-card-date">Card Exp Date: {{order.expDate.getMonth()}} - {{order.expDate.getFullYear()}}</span>
+<div class="adjust-spacing"></div>
+<span>Shipping Method: {{order.shipmentMethod}}</span>
+<span class="adjust-shipping-date">Expected Shipping Date: {{order.expectedDate.getMonth()}} - {{order.expectedDate.getFullYear()}}</span>
+<div class="adjust-spacing"></div>
+
+<span>COST:${{order.totalCost}}</span>
+
+<input class="adjust-submit-button" type="submit" value="Submit Order" (click)="submitOrder()">
+
+<mat-grid-list class="grid-full" cols="4" rowHeight="3:1">
+
+    <mat-grid-title>
+        <mat-grid-tile>
+            Name
+        </mat-grid-tile>
+        <mat-grid-tile>
+            Price per each
+        </mat-grid-tile>
+        <mat-grid-tile>
+            Quantity
+        </mat-grid-tile>
+        <mat-grid-tile>
+            Total price
+        </mat-grid-tile>
+    </mat-grid-title>
+
+    <ng-container *ngFor="let item of order.productList">
+        <mat-grid-tile>
+            <a href="">{{item.name}}</a>
+        </mat-grid-tile>
+        
+        <mat-grid-tile>
+            <p>{{item.price}}</p>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+            <p>{{item.quantity}}</p>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+            <p>{{item.price * item.quantity}}</p>
+        </mat-grid-tile>
+    </ng-container>
+
+</mat-grid-list>

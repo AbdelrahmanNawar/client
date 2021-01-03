@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-step3-payment',
@@ -7,8 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class Step3PaymentComponent implements OnInit {
 
- isCardNumValid=false;
- isExpDateValid=false;
+  @Output() addPaymentEvent = new EventEmitter<{}>();
+ isCardNumValid: boolean = false;
+ isExpDateValid: boolean = false;
  cardNumber:string='';
  month:number=0;
  year:number=0;
@@ -30,6 +31,15 @@ export class Step3PaymentComponent implements OnInit {
     }
     console.log(this.cardNumber);
     console.log(this.cardNumber.length);
+  }
+
+  addItem(): void{
+    if(this.isCardNumValid && this.isExpDateValid){
+      this.addPaymentEvent.emit({
+        cardNum: this.cardNumber,
+        date: new Date(this.year, this.month)
+      })
+    }
   }
 
 }
