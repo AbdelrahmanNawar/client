@@ -6,7 +6,7 @@
     <mat-select [formControl]  = "productControl" required>
         <mat-option>None</mat-option>
         <mat-option *ngFor="let item of productsList" [value] = "item">
-            {{item.name}}
+            {{item.productName}}
         </mat-option>
     </mat-select>
     <mat-error *ngIf="productControl.hasError('required')">Please add items</mat-error>
@@ -34,13 +34,13 @@
         </mat-grid-tile>
     </mat-grid-title>
 
-    <ng-container *ngFor="let item of order.productList">
+    <ng-container *ngFor="let item of order.orderProducts">
         <mat-grid-tile>
-            <a href="">{{item.name}}</a>
+            <a href="">{{item.product.productName}}</a>
         </mat-grid-tile>
         
         <mat-grid-tile>
-            <p>{{item.price}}</p>
+            <p>{{item.product.price}}</p>
         </mat-grid-tile>
 
         <mat-grid-tile>
@@ -48,7 +48,7 @@
         </mat-grid-tile>
 
         <mat-grid-tile>
-            <p>{{item.price * item.quantity}}</p>
+            <p>{{item.product.price * item.quantity}}</p>
         </mat-grid-tile>
     </ng-container>
 

@@ -1,3 +1,4 @@
+import { HttpClientModule } from '@angular/common/http';
 import { MatIconModule } from '@angular/material/icon';
 import { MatStepperModule } from '@angular/material/stepper';
 import { BrowserModule } from '@angular/platform-browser';
@@ -20,6 +21,13 @@ import { DisplayOrdersComponent } from './components/display-orders/display-orde
 import { UserOrderComponent } from './components/user-order/user-order.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { JwtModule } from '@auth0/angular-jwt';
+import { AuthGuard } from './guards/auth-guard.service';
+import { SharedDataService } from './services/shared-data-service';
+
+export function tokenGetter(){
+  return localStorage.getItem("jwt");
+}
 
 @NgModule({
   declarations: [
@@ -32,10 +40,11 @@ import { MatNativeDateModule } from '@angular/material/core';
     Step3PaymentComponent,
     Step4FinalizeComponent,
     DisplayOrdersComponent,
-    UserOrderComponent
+    UserOrderComponent,
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     AngularMaterialModule,
@@ -46,9 +55,19 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatStepperModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    AuthGuard,
+    SharedDataService,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        allowedDomains: ["localhost:64127"],
+        disallowedRoutes: []
+      }
+    }),
   ],
   providers: [
-    MatDatepickerModule,  
+    MatDatepickerModule,
+    SharedDataService,
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

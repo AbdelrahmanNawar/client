@@ -7,8 +7,8 @@
     <mat-label>select item</mat-label>
     <mat-select [formControl]="shippingControl" required>
         <mat-option>None</mat-option>
-        <mat-option *ngFor="let item of shippingList" [value] = "item">
-            {{item.name}}
+        <mat-option *ngFor="let item of shippingDisplay" [value] = "item">
+            {{item.value}}
         </mat-option>
     </mat-select>
     <mat-error *ngIf="shippingControl.hasError('required')">Please add items</mat-error>

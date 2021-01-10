@@ -8,7 +8,7 @@
                 ID
             </mat-grid-tile>
             <mat-grid-tile >
-                Price
+                Total Cost
             </mat-grid-tile>
             <mat-grid-tile >
                 Status
@@ -17,15 +17,15 @@
 
         <ng-container *ngFor="let item of myList">
             <mat-grid-tile >
-                <a href="">{{item.ID}}</a>
+                <a (click)="goToOrder(item)">{{item.orderId}}</a>
             </mat-grid-tile>
             
             <mat-grid-tile >
-                <p>{{item.price}}</p>
+                <p>{{item.totalCost}}</p>
             </mat-grid-tile>
 
             <mat-grid-tile >
-                <p>{{item.status}}</p>
+                <p>{{item.orderStatus}}</p>
             </mat-grid-tile>
         </ng-container>
 

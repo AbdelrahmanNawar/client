@@ -1,8 +1,8 @@
-<span>Card Number: {{order.CardNumber}}</span>
-<span class="adjust-card-date">Card Exp Date: {{order.expDate.getMonth()}} - {{order.expDate.getFullYear()}}</span>
+<span>Card Number: {{order.creditCardNumber}}</span>
+<span class="adjust-card-date">Card Exp Date: {{order.creditCardExpirationDate.getMonth() + 1}} - {{order.creditCardExpirationDate.getFullYear()}}</span>
 <div class="adjust-spacing"></div>
-<span>Shipping Method: {{order.shipmentMethod}}</span>
-<span class="adjust-shipping-date">Expected Shipping Date: {{order.expectedDate.getMonth()}} - {{order.expectedDate.getFullYear()}}</span>
+<span>Shipping Method: {{shipmentMethod}}</span>
+<span class="adjust-shipping-date">Expected Shipping Date: {{order.deliveryDate.getMonth() + 1}} - {{order.deliveryDate.getFullYear()}}</span>
 <div class="adjust-spacing"></div>
 
 <span>COST:${{order.totalCost}}</span>
@@ -25,14 +25,14 @@
             Total price
         </mat-grid-tile>
     </mat-grid-title>
-
-    <ng-container *ngFor="let item of order.productList">
+    
+    <ng-container *ngFor="let item of order.orderProducts">
         <mat-grid-tile>
-            <a href="">{{item.name}}</a>
+            <a href="">{{item.product.productName}}</a>
         </mat-grid-tile>
         
         <mat-grid-tile>
-            <p>{{item.price}}</p>
+            <p>{{item.product.price}}</p>
         </mat-grid-tile>
 
         <mat-grid-tile>
@@ -40,7 +40,7 @@
         </mat-grid-tile>
 
         <mat-grid-tile>
-            <p>{{item.price * item.quantity}}</p>
+            <p>{{item.product.price * item.quantity}}</p>
         </mat-grid-tile>
     </ng-container>
 

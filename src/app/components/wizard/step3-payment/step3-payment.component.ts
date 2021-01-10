@@ -21,23 +21,27 @@ export class Step3PaymentComponent implements OnInit {
   }
 
   verify(): void{
-    if(this.cardNumber.length === 14){
+    if(this.cardNumber.length === 16){
       this.isCardNumValid = true;
+    } else {
+      this.isCardNumValid = false;
     }
     if(this.month > 0 && this.month <= 12){
       if(this.year >= 2021 && this.year <= 2025){
        this.isExpDateValid = true; 
+      } else {
+        this.isExpDateValid = false;
       }
+    } else {
+      this.isExpDateValid = false;
     }
-    console.log(this.cardNumber);
-    console.log(this.cardNumber.length);
   }
 
   addItem(): void{
     if(this.isCardNumValid && this.isExpDateValid){
       this.addPaymentEvent.emit({
         cardNum: this.cardNumber,
-        date: new Date(this.year, this.month)
+        date: new Date(this.year, this.month - 1)
       })
     }
   }

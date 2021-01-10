@@ -1,7 +1,8 @@
-import { dumper5 } from './../../models/dumper5';
+import { OrderProductViewModel } from './../../ViewModel/order.product.viewmodel';
+import { Order } from 'src/app/models/order.model';
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import { dumper4 } from 'src/app/models/dumper4';
+import { ShippingMethod } from 'src/app/enums/shipping-method';
 
 @Component({
   selector: 'app-wizard',
@@ -14,15 +15,21 @@ export class WizardComponent implements OnInit {
   thirdFormGroup: FormGroup;
   fourthFormGroup: FormGroup;
 
-  order: dumper5 = {
-    CardNumber: "",
-    expDate: new Date(2020,2),
-    expectedDate: new Date(2020,2),
-    productList: [],
-    shipmentMethod: "",
-    totalCost: 0
+  order: Order = {
+    creditCardExpirationDate: new Date(),
+    creditCardNumber: "",
+    deliveryDate: new Date(),
+    orderDate: new Date(),
+    orderId: 0,
+    orderProducts: [],
+    orderStatus: 0,
+    shippingId: 0,
+    totalCost: 0,
+    userId: ""
   };
 
+  shipmentMethod: ShippingMethod = ShippingMethod.AirPlane;
+  
   constructor(private _formBuilder: FormBuilder) {
     
     this.firstFormGroup = this._formBuilder.group({
@@ -46,20 +53,18 @@ export class WizardComponent implements OnInit {
     
   }
 
-  addItems(value: dumper4): void{
-    this.order.productList.push(value);
-    this.order.totalCost += (value.price * value.quantity);
+  addItems(value: any): void{
+    this.order.orderProducts.push(value);
   }
 
   addShipment(value: any): void{
-    this.order.shipmentMethod = value.method;
-    this.order.expectedDate = value.date;
-    this.order.totalCost += value.cost;
-    console.log(this.order);
+    this.order.shippingId = value.ShippingId;
+    this.order.deliveryDate = value.expDate;
+    this.shipmentMethod = value.shipmentMethod;
   }
 
   addPayment(value: any): void{
-    this.order.CardNumber = value.cardNum;
-    this.order.expDate = value.date;
+    this.order.creditCardNumber = value.cardNum;
+    this.order.creditCardExpirationDate = value.date;
   }
 }

@@ -1,7 +1,7 @@
 <label>Ender your Card Number:</label>
 <br>
 <div>
-    <input class="adjust-card-input" type="text" maxlength="14" minlength="14" [(ngModel)]="cardNumber">
+    <input class="adjust-card-input" type="text" maxlength="16" minlength="16" [(ngModel)]="cardNumber">
     <br>
     <span class="danger" *ngIf="!isCardNumValid">please enter a valid card number</span>
 </div>

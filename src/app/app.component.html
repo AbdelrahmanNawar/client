@@ -1,7 +1,9 @@
 <mat-toolbar color="primary" class="app-header">
   <div>Welcome To The Store</div>
   <span class="nav-tool-items">
-    <a mat-button routerLink="login" routerLinkActive="active">Log in</a>
+    <a mat-button routerLink="login" routerLinkActive="active" *ngIf="!isLoggedIn">Log In</a>
+    <a mat-button (click)="logOut()" routerLinkActive="active" *ngIf="isLoggedIn">Log Out</a>
+    
     <a mat-button mat-raised-button routerLink="register" routerLinkActive="active">Register</a>
   </span>
 </mat-toolbar>
@@ -9,7 +11,7 @@
 
 <div style="margin-top: 5%;"></div>
   <div class="login-wrapper" fxLayoutAlign="center">
-    <router-outlet></router-outlet>
+    <router-outlet ></router-outlet>
   </div>
   
 

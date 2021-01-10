@@ -1,8 +1,9 @@
-import { dumper5 } from './../../../models/dumper5';
-import { dumper3 } from './../../../models/dumper3';
+import { OrderProduct } from './../../../models/order-Product';
+import { HttpClient } from '@angular/common/http';
+import { Order } from 'src/app/models/order.model';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { dumper4 } from 'src/app/models/dumper4';
+import { Product } from 'src/app/models/product.model';
 
 @Component({
   selector: 'app-step1-products',
@@ -11,42 +12,45 @@ import { dumper4 } from 'src/app/models/dumper4';
 })
 export class Step1ProductsComponent implements OnInit {
   
-  @Output() newItemEvent = new EventEmitter<dumper4>();
-  @Input() order: dumper5 = {
-    CardNumber: "",
-    expDate: new Date(2020,2),
-    expectedDate: new Date(2020,2),
-    productList: [],
-    shipmentMethod: "",
-    totalCost: 0
+  @Output() newItemEvent = new EventEmitter<OrderProduct>();
+
+  @Input() order: Order = {
+    creditCardExpirationDate: new Date(),
+    creditCardNumber: "",
+    deliveryDate: new Date(),
+    orderDate: new Date(),
+    orderId: 0,
+    orderProducts: [],
+    orderStatus: 0,
+    shippingId: 0,
+    totalCost: 0,
+    userId: ""
   };
   
   productControl = new FormControl('', Validators.required);
-  productsList: dumper3[] = [
-    {name: 'AKM', price: 150},
-    {name: 'P90', price: 225},
-    {name: 'AWM', price: 510},
-    {name: 'Pistol', price: 90},
-  ];
+  productsList: Array<Product> = [];
 
   quantity: number = 0;
   
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
+    this.http.get("http://localhost:64127/api/products")
+    .subscribe((res: any) => {
+      this.productsList = res;
+    }, err => {
+      console.log(err);
+    })
   }
 
   addItem(): void{
     if(this.quantity !==0 && this.productControl.value){
       this.newItemEvent.emit({
-        name: this.productControl.value?.name,
-        price: this.productControl.value?.price,
-        quantity: this.quantity
-      })
-    } else {
-      console.log("fe moshkel");
-      console.log("productControl", this.productControl);
-      console.log("quantity", this.quantity);  
-    }
+        productId: this.productControl.value?.productId,
+        orderId: this.order.orderId,
+        quantity: this.quantity,
+        product: this.productControl.value
+      });
+    } 
   }
 }
