@@ -56,8 +56,8 @@ export class Step4FinalizeComponent implements OnInit {
                 console.log(res);
               }, err => {
                 console.log(err);
-              })
-    this.route.navigateByUrl("/orders");
+              });
+    this.route.navigate(["orders"]);
   }
 
 }

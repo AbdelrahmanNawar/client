@@ -17,4 +17,4 @@
 </div>
 <div class="separate"></div>
 <input class="push-right" type="submit" value="Verify" (click)="verify()">
-<input class="adjust-year" type="submit" value="Add" (click)="addItem()">
+<input *ngIf="isCardNumValid && isExpDateValid" class="adjust-year" type="submit" value="Add" (click)="addItem()">
